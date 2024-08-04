@@ -5,7 +5,6 @@ nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
-# Defining LemmaTokenizer
 class LemmaTokenizer:
     def __init__(self):
         self.wordnetlemma = WordNetLemmatizer()
