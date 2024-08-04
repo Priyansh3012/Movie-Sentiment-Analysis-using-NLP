@@ -10,9 +10,12 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-# Load the saved model and vectorizer
-model = pickle.load(open('modelLogReg.pkl', 'rb'))
-vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+def load_pickle(filename):
+    with open(filename, 'rb') as file:
+        return pickle.load(file)
+
+model = load_pickle('modelLogReg.pkl')
+vectorizer = load_pickle('vectorizer.pkl')
 
 app = Flask(__name__)
 
