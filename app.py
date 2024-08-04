@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 import pickle
 import nltk
+from joblib import dump, load
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
 from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
 try:
@@ -10,12 +13,9 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-def load_pickle(filename):
-    with open(filename, 'rb') as file:
-        return pickle.load(file)
-
-model = load_pickle('modelLogReg.pkl')
-vectorizer = load_pickle('vectorizer.pkl')
+# Loading the models
+vectorizer = load('vectorizer.joblib')
+model = load('modelLogReg.joblib')
 
 app = Flask(__name__)
 
