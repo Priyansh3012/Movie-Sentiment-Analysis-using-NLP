@@ -14,6 +14,12 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
+class LemmaTokenizer:
+    def __init__(self):
+        self.wordnetlemma = WordNetLemmatizer()
+    def __call__(self, reviews):
+        return [self.wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
+
 # Loading the models
 vectorizer = load('vectorizer.joblib')
 model = load('modelLogReg.joblib')
