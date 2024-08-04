@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request
 import pickle
 import nltk
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
 from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
 try:
@@ -12,13 +10,11 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-
 # Load the saved model and vectorizer
 model = pickle.load(open('modelLogReg.pkl', 'rb'))
 vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -38,7 +34,6 @@ def index():
         return render_template('index.html', review=review, sentiment=sentiment)
 
     return render_template('index.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
