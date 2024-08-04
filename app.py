@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-import pickle
 import nltk
 from joblib import dump, load
 from sklearn.feature_extraction.text import TfidfVectorizer
