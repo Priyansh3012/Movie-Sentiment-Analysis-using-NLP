@@ -13,7 +13,7 @@ except LookupError:
     nltk.download('wordnet')
 
 # Defining LemmaTokenizer
-class LemmaTokenizer:
+class LemmaTokenizer(object):
     def __init__(self):
         self.wordnetlemma = WordNetLemmatizer()
 
