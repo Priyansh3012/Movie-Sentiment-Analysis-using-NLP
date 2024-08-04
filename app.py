@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
 import pickle
+import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-import nltk
+from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
 try:
     nltk.data.find('tokenizers/punkt')
@@ -10,15 +11,6 @@ try:
 except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
-
-
-# Define LemmaTokenizer
-class LemmaTokenizer:
-    def __init__(self):
-        self.wordnetlemma = WordNetLemmatizer()
-
-    def __call__(self, reviews):
-        return [self.wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
 
 
 # Load the saved model and vectorizer
