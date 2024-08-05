@@ -3,6 +3,8 @@ import nltk
 from joblib import dump, load
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
 #from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
 class LemmaTokenizer:
