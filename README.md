@@ -4,6 +4,8 @@
 This project focuses on sentiment analysis of movie reviews using **Natural Language Processing (NLP)** techniques. By leveraging advanced **text preprocessing, feature engineering, and machine learning models**, the application classifies reviews as either positive or negative. The project includes data visualization to understand the characteristics of the text data and to ensure an effective model-building process.
 ![image](https://github.com/user-attachments/assets/b0618b3e-c898-4e6f-bdbb-2669f5459309)
 ![image](https://github.com/user-attachments/assets/5cadca5d-2616-4248-bf44-68e392c990eb)
+![image](https://github.com/user-attachments/assets/a769b7f3-6f09-4240-bf11-352756c16851)
+
 
 ## Tech Stack
 - **Libraries Used:**
