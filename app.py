@@ -12,19 +12,6 @@ except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-def lemma_tokenizer(reviews):
-    wordnetlemma = WordNetLemmatizer()
-    return [wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
-
-
-tfidfvect = TfidfVectorizer(
-    analyzer="word",
-    tokenizer=lemma_tokenizer,  # Use the function here
-    ngram_range=(1, 3),
-    min_df=10,
-    max_features=5000
-)
-
 # Load the logistic regression model
 model = load('modelLogReg.joblib')
 
