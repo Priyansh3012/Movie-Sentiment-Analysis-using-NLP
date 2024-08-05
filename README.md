@@ -1,7 +1,7 @@
 # Movie Review Sentiment Analysis Using NLP
 
 ## Description
-This project focuses on sentiment analysis of movie reviews using **natural language processing (NLP)** techniques. By leveraging advanced **text preprocessing, feature engineering, and machine learning models**, the application classifies reviews as either positive or negative. The project includes data visualization to understand the characteristics of the text data and to ensure an effective model-building process.
+This project focuses on sentiment analysis of movie reviews using **Natural Language Processing (NLP)** techniques. By leveraging advanced **text preprocessing, feature engineering, and machine learning models**, the application classifies reviews as either positive or negative. The project includes data visualization to understand the characteristics of the text data and to ensure an effective model-building process.
 
 ## Tech Stack
 - **Libraries Used:**
