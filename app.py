@@ -1,18 +1,19 @@
 from flask import Flask, render_template, request
 import nltk
+from joblib import dump, load
 from sklearn.feature_extraction.text import TfidfVectorizer
-from joblib import load
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import word_tokenize
+from sklearn.linear_model import LogisticRegression
+from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
 try:
     nltk.data.find('tokenizers/punkt')
-    nltk.data.find('corpora/wordnet')
+    nltk.data.find('tokenizers/wordnet')
 except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-# Load the logistic regression model
+# Loading the models
+vectorizer = load('vectorizer.joblib')
 model = load('modelLogReg.joblib')
 
 app = Flask(__name__)
@@ -20,15 +21,17 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        # Get the review text from the form
         review = request.form['review']
-        
-        # Make sure to fit the vectorizer before transforming if not serialized
-        # Example if data is available:
-        # tfidfvect.fit(data)  # Use your training data
 
-        transformed_review = tfidfvect.transform([review]).toarray()
+        # Transform the review using the loaded vectorizer
+        transformed_review = vectorizer.transform([review]).toarray()
+
+        # Predict the sentiment using the loaded model
         prediction = model.predict(transformed_review)
-        sentiment = 'Positive' if prediction == 1 else 'Negative'
+
+        # Interpret the result
+        sentiment = 'Positive' if prediction == '1' else 'Negative'
 
         return render_template('index.html', review=review, sentiment=sentiment)
 
