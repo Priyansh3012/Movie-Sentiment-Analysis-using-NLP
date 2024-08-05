@@ -1,28 +1,31 @@
 from flask import Flask, render_template, request
 import nltk
-from joblib import dump, load
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
+from joblib import load
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-#from tokenizer import LemmaTokenizer  # Import from tokenizer module
-
-class LemmaTokenizer:
-    def __init__(self):
-        self.wordnetlemma = WordNetLemmatizer()
-
-    def __call__(self, reviews):
-        return [self.wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
 
 try:
     nltk.data.find('tokenizers/punkt')
-    nltk.data.find('tokenizers/wordnet')
+    nltk.data.find('corpora/wordnet')
 except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
 
-# Loading the models
-vectorizer = load('vectorizer.joblib')
+def lemma_tokenizer(reviews):
+    wordnetlemma = WordNetLemmatizer()
+    return [wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
+
+
+tfidfvect = TfidfVectorizer(
+    analyzer="word",
+    tokenizer=lemma_tokenizer,  # Use the function here
+    ngram_range=(1, 3),
+    min_df=10,
+    max_features=5000
+)
+
+# Load the logistic regression model
 model = load('modelLogReg.joblib')
 
 app = Flask(__name__)
@@ -30,17 +33,15 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        # Get the review text from the form
         review = request.form['review']
+        
+        # Make sure to fit the vectorizer before transforming if not serialized
+        # Example if data is available:
+        # tfidfvect.fit(data)  # Use your training data
 
-        # Transform the review using the loaded vectorizer
-        transformed_review = vectorizer.transform([review]).toarray()
-
-        # Predict the sentiment using the loaded model
+        transformed_review = tfidfvect.transform([review]).toarray()
         prediction = model.predict(transformed_review)
-
-        # Interpret the result
-        sentiment = 'Positive' if prediction == '1' else 'Negative'
+        sentiment = 'Positive' if prediction == 1 else 'Negative'
 
         return render_template('index.html', review=review, sentiment=sentiment)
 
