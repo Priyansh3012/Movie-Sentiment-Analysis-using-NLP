@@ -1,0 +1,6 @@
+component:
+  name: my-python-service
+  runtime: python
+  source: ./
+  dependencies:
+    - requirements.txt
