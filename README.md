@@ -18,14 +18,14 @@ This project focuses on sentiment analysis of movie reviews using **Natural Lang
 
 2. **Data Analysis and Visualization:**
    - **Checked for class imbalance using countplots**.
-   - Analyzed and visualized the most important words in positive and negative reviews using word clouds.
-   - Compared review lengths, character counts, and word counts with **histograms and density plots**.
+   - Analyzed and visualized the **most important words in positive and negative reviews using word clouds**.
+   - **Compared review lengths, character counts, and word counts with histograms and density plots.**
    - Used **CountVectorizer and bag-of-words models to plot common unigrams, bigrams, trigrams, and four-grams for both positive and negative reviews.**
 
 3. **Feature Engineering:**
    - **Applied word lemmatization** to standardize text data.
    - Trained models using different **n-grams (unigram, bigram, trigram, four-gram) with CountVectorizer and TfidfVectorizer**.
-   - Evaluated feature importance and determined that the combination of unigrams, bigrams, and trigrams with TfidfVectorizer performed best.
+   - **Evaluated feature importance** and determined that the combination of unigrams, bigrams, and trigrams with TfidfVectorizer performed best.
 
 4. **Model Building and Evaluation:**
    - Built and evaluated models using **Logistic Regression, Decision Tree, and Random Forest Classifiers**.
