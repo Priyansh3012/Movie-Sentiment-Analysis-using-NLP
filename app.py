@@ -13,12 +13,9 @@ except LookupError:
     nltk.download('wordnet')
 
 # Defining LemmaTokenizer
-class LemmaTokenizer(object):
-    def __init__(self):
-        self.wordnetlemma = WordNetLemmatizer()
-
-    def __call__(self, reviews):
-        return [self.wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
+def lemma_tokenizer(reviews):
+    wordnetlemma = WordNetLemmatizer()
+    return [wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
 
 # Loading the models
 vectorizer = load('vectorizer.joblib')
