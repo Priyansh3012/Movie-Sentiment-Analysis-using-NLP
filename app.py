@@ -5,17 +5,19 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 #from tokenizer import LemmaTokenizer  # Import from tokenizer module
 
+class LemmaTokenizer:
+    def __init__(self):
+        self.wordnetlemma = WordNetLemmatizer()
+
+    def __call__(self, reviews):
+        return [self.wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
+
 try:
     nltk.data.find('tokenizers/punkt')
     nltk.data.find('tokenizers/wordnet')
 except LookupError:
     nltk.download('punkt')
     nltk.download('wordnet')
-
-# Defining LemmaTokenizer
-def lemma_tokenizer(reviews):
-    wordnetlemma = WordNetLemmatizer()
-    return [wordnetlemma.lemmatize(word) for word in word_tokenize(reviews)]
 
 # Loading the models
 vectorizer = load('vectorizer.joblib')
